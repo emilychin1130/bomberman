@@ -8,29 +8,24 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import java.awt.image.BufferedImage;
-
-public class Bomberman {
+public class Bomberman2 {
    private JFrame mainFrame;
    private JLabel headerLabel;
    private JLabel statusLabel;
    private JPanel controlPanel;
-   protected static int size = 700;
 
-//  private JLabel test;
-
-   public Bomberman(){
+   public Bomberman2(){
       prepareGUI();
    }
 
    public static void main(String[] args){
-      Bomberman Bomberman = new Bomberman();  
-      Bomberman.showEvent();       
+      Bomberman2 Bomberman2 = new Bomberman2();  
+      Bomberman2.showEventDemo();       
    }
 
    private void prepareGUI(){
       mainFrame = new JFrame("Bomberman");
-      mainFrame.setSize(size,size);
+      mainFrame.setSize(700,700);
       mainFrame.setLayout(new GridLayout(3, 1));
 
       headerLabel = new JLabel("",JLabel.CENTER );
@@ -41,42 +36,25 @@ public class Bomberman {
          public void windowClosing(WindowEvent windowEvent){
             System.exit(0);
          }        
-      });    
-      controlPanel = new JPanel();
+      });
+      final Image image = requestImage();    
+    //  controlPanel = new JPanel();
+
+      JPanel controlPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(image, 0, 0, null);
+            }
+        };
       controlPanel.setLayout(new FlowLayout());
+
 
       mainFrame.add(headerLabel);
       mainFrame.add(controlPanel);
       mainFrame.add(statusLabel);
       mainFrame.setVisible(true);
 
-
-   //   mainFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-
-//judy is very sad
-/*
-      BufferedImage myImage = null;
-      try {
-         myImage = ImageIO.read(new File("tress.jpg"));
-      } catch (IOException e) {
-      }
-      JFrame myJFrame = new JFrame("Image pane");
-      myJFrame.setContentPane(new ImagePanel(myImage));
-*/
-/*
-      try {
-         test = new JLabel(new ImageIcon(ImageIO.read(new File("trees.jpg"))));
-      }
-      catch (IOException e) {
-         e.printStackTrace();
-      }
-      test.setLayout(new FlowLayout());
-
-      mainFrame.setContentPane(test);
-   
-      mainFrame.pack();
-      mainFrame.setVisible(true); 
-*/
 /*
       try {
          mainFrame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("trees.jpg")))));
@@ -89,10 +67,31 @@ public class Bomberman {
       mainFrame.setVisible(true); 
 */
 
+
+
    }
 
 
-   private void showEvent(){
+
+   private Image requestImage() {
+        Image image = null;
+
+        try {
+    //        image = ImageIO.read(new URL("http://www.johnlennon.com/wp-content/themes/jl/images/home-gallery/2.jpg"));
+            image = ImageIO.read(new File("trees.jpg"));      
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return image;
+    }
+
+
+
+
+   private void showEventDemo(){
+      System.out.println("hi");
+
       headerLabel.setText("Welcome to Bomberman Game!"); 
 
       JButton playButton = new JButton("Play");
@@ -119,19 +118,8 @@ public class Bomberman {
          if( command.equals( "Play" ))  {
             statusLabel.setText("Play Button clicked.");
          } else if ( command.equals( "How to Play" ) )  {
-            //statusLabel.setText("How to Play Button clicked.");
-            displayHow();
-         //   mainFrame.setVisible(false);  
-            //but not good. um. bc that closes the mainframe.
+            statusLabel.setText("How to Play Button clicked."); 
          }   	
       }		
-   }
-
-   private void displayHow() {
-      JFrame how = new JFrame("How to Play");
-      how.setSize(size,size);
-      how.setVisible(true);
-
-
    }
 }
