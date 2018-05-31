@@ -110,7 +110,7 @@ public class Board{
     fo
   }
 
-  public static explode(int x, int y) {
+  public static void explode(int x, int y) {
     if (board[x][y].getType() == 1) {
       board[x][y].isAlive = false;
     }
@@ -122,7 +122,7 @@ public class Board{
     }
   }
 
-  public dropBomb() {
+  public void dropBomb() {
     //image at player.getLocation changes to image of bomb
 
     GameObject[][] board = Board.getboard();
@@ -140,5 +140,5 @@ public class Board{
       explode(getLocation().x(), getLocation().y() + 1);
     }
   }
-  
+
 }
