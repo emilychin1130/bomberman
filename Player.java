@@ -2,7 +2,7 @@ public class Player extends MovingObject{
 	protected int bombLength;
 	protected boolean canMoveThroughWall;
 
-	public Player {
+	public Player() {
 		super(new Point(1,1), 1, true);
 		bombLength = 1;
 		canMoveThroughWall = false;
@@ -11,6 +11,38 @@ public class Player extends MovingObject{
 	public Point getLocation() {
 		return location;
 	}
+
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.setColor(Color.RED);
+		g.fillRect(x,y,50,50);
+	}
+
+	public void keyPressed(KeyEvent e) {
+		int code = e.getKeyCode();
+
+		if (code == KeyEvent.VK_DOWN){
+			moveDown();
+		}
+		if (code == KeyEvent.VK_UP){
+			moveUp();
+		}
+		if (code == KeyEvent.VK_LEFT){
+			moveLeft();
+		}
+		if (code == KeyEvent.VK_RIGHT){
+			moveRight();
+		}
+	}
+
+
+	public void keyTyped(KeyEvent e) {}
+
+	public void keyReleased(KeyEvent e) {
+		velx=0;
+		vely=0;
+	}
+
 
 	public static explode(int x, int y) {
 		if (board[x][y].getType() == 1) {

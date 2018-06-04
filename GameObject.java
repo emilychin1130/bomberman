@@ -1,6 +1,6 @@
 import java.util.Point; //or awt
 
-public class GameObject {
+public class GameObject { //may need to extend JPanel
 	protected Point location;
 	protected int type;
 	//player = 1
