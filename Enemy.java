@@ -8,18 +8,34 @@ import java.awt.Point;
 import javax.swing.*;
 import java.awt.*;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
+import java.awt.image.BufferedImage;
+
 public class Enemy extends JPanel implements ActionListener{
 	protected boolean isAlive;
 	protected int x = 0, y = 0, velx = 0, vely = 0;
 	protected Bomberman person;
+	protected BufferedImage image;
 
 	public Enemy(int x, int y, Bomberman person) {
 		this.x = x;
 		this.y = y;
 		this.person = person;
-	//	addKeyListener(this);
-	//	setFocusable(true);
-	//	setFocusTraversalKeysEnabled(false);
+		try {
+			image = ImageIO.read(new File("enemy.png"));
+		}
+		catch (IOException e) {
+			//nothing
+		}
+	}
+
+	public void render(Graphics g) {
+		g.drawImage(image, x, y, this);
 	}
 
 	public Point getLocation() {
