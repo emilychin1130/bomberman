@@ -10,23 +10,25 @@ import javax.swing.ImageIcon;
 
 import java.awt.image.BufferedImage;
 
-public class Bomberman extends JPanel implements ActionListener, KeyListener {
+public class Bomberman3 extends JPanel implements ActionListener, KeyListener {
 
-   static Bomberman person = new Bomberman();
+   static Bomberman3 person = new Bomberman3();
    protected static int size = 650;
+   Timer t = new Timer(5, this);
+   int x = 50, y = 50, velx = 0, vely = 0;
+   
+   boolean dropBomb = false;
+   Enemy e1 = new Enemy(100,50,person);
+   Bomb b1;
+   Fire f1;
+
    private static JFrame mainFrame;
    private static JFrame playFrame;
    private static JFrame howFrame;
    private static JLabel headerLabel;
    private static JPanel controlPanel;
-   Timer t = new Timer(5, this);
-   int x = 50, y = 50, velx = 0, vely = 0;
-   boolean dropBomb = false;
-   Enemy e1 = new Enemy(100,50,person);
-   Bomb b;
-   Fire fNorth, fSouth, fEast, fWest;
 
-   public Bomberman(){
+   public Bomberman3(){
       t.start();
       addKeyListener(this);
       setFocusable(true);
@@ -73,12 +75,9 @@ public class Bomberman extends JPanel implements ActionListener, KeyListener {
       }
 
       if (dropBomb) {
-         b.render(g);
+         b1.render(g);
          //SoundEffect.EXPLODE.play();
-         fNorth.render(g, "North");
-         fSouth.render(g, "South");
-         fEast.render(g, "East");
-         fWest.render(g, "West");
+         f1.render(g);
       }
    }
 
@@ -87,14 +86,17 @@ public class Bomberman extends JPanel implements ActionListener, KeyListener {
          velx=0;
          x = 50;
       }
+
       if(x > 558){
          velx=0;
          x = 558;
       }
+
       if(y < 50){
          vely=0;
          y = 50;
       }
+
       if(y > 558){
          vely=0;
          y = 558;
@@ -137,11 +139,8 @@ public class Bomberman extends JPanel implements ActionListener, KeyListener {
          velx = 1;
       }
       if (code == KeyEvent.VK_SPACE){
-         b = new Bomb(person);
-         fNorth = new Fire(person);
-         fSouth = new Fire(person);
-         fEast = new Fire(person);
-         fWest = new Fire(person);
+         b1 = new Bomb(person);
+         f1 = new Fire(person);
          dropBomb = true;
       }
    }
