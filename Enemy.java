@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Point; //or awt
+import java.awt.Point; 
 
 public class Enemy implements ActionListener, KeyListener{
 	protected boolean isAlive;
