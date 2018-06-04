@@ -15,6 +15,7 @@ public class Bomberman extends JPanel implements ActionListener, KeyListener {
    protected static int size = 650;
    Timer t = new Timer(5, this);
    int x = 50, y = 50, velx = 0, vely = 0;
+   Toolkit tool = Toolkit.getDefaultToolkit();
 
    public Bomberman(){
       t.start();
@@ -34,22 +35,15 @@ public class Bomberman extends JPanel implements ActionListener, KeyListener {
    public int gety() {
       return y;
    }
-/*
-   public void paintComponent(Graphics g, int x, int y) {
-      super.paintComponent(g);
-      g.setColor(Color.darkGray);
-      g.fillRect()
-   }
-*/
+
    public void paint(Graphics g){
       super.paint(g);
-      Toolkit t=Toolkit.getDefaultToolkit();  
-      Image i=t.getImage("character.png");  
+      //Toolkit t=Toolkit.getDefaultToolkit();  
+      Image i = tool.getImage("character.png");  
       g.drawImage(i,x,y,this);  
       //super.paintComponent(g);
      // g.setColor(Color.darkGray);
      // g.fillRect(0,0,100,100);
-
    }
 
    public void paintComponent(Graphics g){ //paint indestructible walls
@@ -75,8 +69,10 @@ public class Bomberman extends JPanel implements ActionListener, KeyListener {
 
    public void paintBomb(Graphics g, int a, int b){
       super.paint(g);
-      g.setColor(Color.BLACK);
-      g.fillOval(x,y,50,50);
+      Image bomb = tool.getImage("bomb.png");
+      g.drawImage(bomb,x,y,this);
+   //   g.setColor(Color.BLACK);
+   //   g.fillOval(x,y,50,50);
    }
 
    public void paintFire(Graphics g, int a, int b){
@@ -143,7 +139,8 @@ public class Bomberman extends JPanel implements ActionListener, KeyListener {
          velx = 1;
       }
       if (code == KeyEvent.VK_SPACE){
-         displayFire();
+         //Graphics g = new Graphics2D();
+         //paintBomb(g, 0, 0);
          //System.out.println("space bar pressed");
       }
    }
@@ -154,14 +151,11 @@ public class Bomberman extends JPanel implements ActionListener, KeyListener {
       vely=0;
    }
 
-   public void displayFire() {
-
-   }
-
 //could add a "help/how to play" option in like. some menu bar? 
    //like not in the actual jframe but in the very top of the screen where the "file" "edit" etc stuff usually is
    public static void main(String[] args){
-      Bomberman person = new Bomberman();  
+      Bomberman person = new Bomberman();
+      Enemy test = new Enemy(100,50,person);
       JFrame mainFrame = new JFrame("Bomberman");
       mainFrame.setSize(size,size);
       

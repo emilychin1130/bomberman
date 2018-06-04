@@ -5,25 +5,30 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Point; 
+import javax.swing.*;
+import java.awt.*;
 
-public class Enemy implements ActionListener, KeyListener{
+public class Enemy extends JPanel implements ActionListener{
 	protected boolean isAlive;
 	protected int x = 0, y = 0, velx = 0, vely = 0;
+	protected Bomberman person;
 
-	public Enemy(int x, int y) {
+	public Enemy(int x, int y, Bomberman person) {
 		this.x = x;
 		this.y = y;
-		addKeyListener(this);
-		setFocusable(true);
-		setFocusTraversalKeysEnabled(false);
+		this.person = person;
+	//	addKeyListener(this);
+	//	setFocusable(true);
+	//	setFocusTraversalKeysEnabled(false);
 	}
 
 	public Point getLocation() {
 		return new Point(x,y);
 	}
 
-	public void setLocation(x,y) {
-		this.location = new Point(x,y);
+	public void setLocation(int x, int y) {
+		this.x=x;
+		this.y=y;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -85,29 +90,29 @@ public class Enemy implements ActionListener, KeyListener{
 	}
 
 	public void move() {
-		boolean moveX = (Math.abs(this.x() - bomberman.getx()) > Math.abs(this.y() - bomberman.gety()));
+		boolean moveX = (Math.abs(this.x - person.getx()) > Math.abs(this.y - person.gety()));
 		if(moveX){
-			if(this.x() > bomberman.getx()){
-				int x = Math.random()*2 + 1;
-				super.moveLeft(x);
+			if(this.x > person.getx()){
+				int x = (int) Math.random()*2 + 1;
+				moveLeft(x);
 			}
 			else{
-				int x = Math.random()*2 + 1;
-				super.moveRight(x);
+				int x = (int) Math.random()*2 + 1;
+				moveRight(x);
 			}
 		}
 		else{
-			if(this.y() > bomberman.gety()){
-				int x = Math.random()*2 + 1;
-				super.moveUp(x);
+			if(this.y > person.gety()){
+				int x = (int) Math.random()*2 + 1;
+				moveUp(x);
 			}
 			else{
-				int x = Math.random()*2 + 1;
-				super.moveDown(x);
+				int x = (int) Math.random()*2 + 1;
+				moveDown(x);
 			}
 		}
 
-		if (bomberman.getx() == this.x() && bomberman.gety() == this.y()) {
+		if (person.getx() == this.x && person.gety() == this.y) {
 			//player dies
 		}
 	}
