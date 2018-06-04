@@ -10,25 +10,31 @@ import javax.swing.ImageIcon;
 
 import java.awt.image.BufferedImage;
 
-public class Bomberman2 extends JPanel {
-   private JFrame mainFrame;
-   private JFrame playFrame;
-   private JFrame howFrame;
-   private JFrame gameFrame;
-   private JLabel headerLabel;
-   private JLabel statusLabel;
-   private JPanel controlPanel;
-   protected static int size = 650;
+
+
+//prob shouldn't use this anymore bc i made everything static :)
+
+
+
+public class Bombermantest extends JPanel{
+   private static JFrame mainFrame;
+   private static JFrame playFrame;
+   private static JFrame howFrame;
+   private static JFrame gameFrame;
+   private static JLabel headerLabel;
+//   private JLabel statusLabel;
+   private static JPanel controlPanel;
+   protected static int size = 700;
 
 //  private JLabel test;
+   private Person person = new Person();
 
-   public Bomberman2(){
+   public Bombermantest(){
       prepareGUI();
    }
 
-//sets up the main screen
-   private void prepareGUI(){
-      mainFrame = new JFrame("Bomberman");
+   public static void prepareGUI() {
+      mainFrame = new JFrame("Bombermantest");
       mainFrame.setSize(size,size);
       mainFrame.setLayout(new GridLayout(3, 1));
 
@@ -48,49 +54,7 @@ public class Bomberman2 extends JPanel {
       mainFrame.add(controlPanel);
    //   mainFrame.add(statusLabel);
       mainFrame.setVisible(true);
-
-
-//judy is very sad
-/*
-      BufferedImage myImage = null;
-      try {
-         myImage = ImageIO.read(new File("trees.jpg"));
-      } catch (IOException e) {
-      }
-      mainFrame.setContentPane(new ImagePanel(myImage));
-*/
-
-/*
-      try {
-         test = new JLabel(new ImageIcon(ImageIO.read(new File("trees.jpg"))));
-      }
-      catch (IOException e) {
-         e.printStackTrace();
-      }
-      test.setLayout(new FlowLayout());
-
-      mainFrame.setContentPane(test);
-   
-      mainFrame.pack();
-      mainFrame.setVisible(true); 
-*/
-/*
-      try {
-         mainFrame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("trees.jpg")))));
-      } 
-      catch (IOException e) {
-         e.printStackTrace();
-      }
-
-      mainFrame.pack();
-      mainFrame.setVisible(true); 
-*/
-
-   }
-
-
-   private void showEvent(){
-      headerLabel.setText("Welcome to Bomberman Game!"); 
+      headerLabel.setText("Welcome to Bombermantest Game!"); 
 
       JButton playButton = new JButton("Play");
       JButton howToPlayButton = new JButton("How to Play");
@@ -104,19 +68,17 @@ public class Bomberman2 extends JPanel {
       controlPanel.add(playButton);
       controlPanel.add(howToPlayButton);
       
-
-
-
-
-
-
-
       mainFrame.setVisible(true);
       playButton.setOpaque(true);  
-      howToPlayButton.setOpaque(true); 
+      howToPlayButton.setOpaque(true);
    }
 
-   private class ButtonClickListener implements ActionListener{
+   public static void main(String[] args){
+      Bombermantest bombermantest = new Bombermantest();  
+      //Bombermantest.showEvent();      
+   }
+
+   private static class ButtonClickListener implements ActionListener{
       public void actionPerformed(ActionEvent e) {
          String command = e.getActionCommand();  
          if (command.equals("Play")) {
@@ -128,12 +90,12 @@ public class Bomberman2 extends JPanel {
          }
          else if (command.equals("Start")) {
             displayGame();
-         }    
-      }   
+         }   	
+      }		
    }
 
 //displays the screen to select theme and then start game
-   private void displayPlay() {
+   private static void displayPlay() {
       playFrame = new JFrame("Start Screen");
       playFrame.setSize(size,size);
       JPanel playPanel = new JPanel();
@@ -153,60 +115,31 @@ public class Bomberman2 extends JPanel {
    }
 
 //displays instructions to play the game
-   private void displayHow() {
+   private static void displayHow() {
       //probably should set like a layout manager or smth. oh boy
       howFrame = new JFrame("How to Play"); //should i make this a global variable like mainFrame?
       howFrame.setSize(size,size);
       //use jtextarea?
       JLabel howLabel = new JLabel("",JLabel.CENTER );
-      howLabel.setText("<html>Use arrow keys to move the bomberman.<br>Press spacebar to drop bomb.<br>Avoid the enemies to make it to the exit!</html>");
+      howLabel.setText("<html>Use arrow keys to move the Bombermantest.<br>Press spacebar to drop bomb.<br>Avoid the enemies to make it to the exit!</html>");
       howFrame.add(howLabel);
       howFrame.setVisible(true);
    }
 
-   private void displayGame() {
-      gameFrame = new JFrame("Bomberman");
+   private static void displayGame() {
+      gameFrame = new JFrame("Bombermantest");
       gameFrame.setSize(size,size);
-      playFrame.dispose();
-      //paint the indestructible walls.
-   //   paintNDWalls()
-
-
-
       gameFrame.setVisible(true);
+      playFrame.dispose();
       gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
    }
 
-   public void paintNDWalls(Graphics g){
+   public void paintComponent(Graphics g) {
       super.paintComponent(g);
-      g.setColor(Color.darkGray);
-      g.fillRect(0,0,100,100);
-
-/*      for (int i = 0; i < 600; i+=50){
-         super.paintComponent(g);
-         g.setColor(Color.darkGray);
-         g.fillRect(i,0,i+50,50);
-      }
-      for (int i = 0; i < 600; i+=50){
-         super.paintComponent(g);
-         g.setColor(Color.darkGray);
-         g.fillRect(i,600,i+50,650);
-      }
-      for (int i = 0; i < 600; i+=50){
-         super.paintComponent(g);
-         g.setColor(Color.darkGray);
-         g.fillRect(0,i,50,i+50);
-      }
-      for (int i = 0; i < 600; i+=50){
-         super.paintComponent(g);
-      g.setColor(Color.darkGray);
-      g.fillRect(600,i,650,i+50);
-      } */
-   }
-
-   public static void main(String[] args){
-      Bomberman2 bomberman = new Bomberman2();  
-      bomberman.showEvent();       
+      g.setColor(Color.RED);
+      g.fillRect(0,0,50,30);
+   //   person.render(g);
    }
 
 }
