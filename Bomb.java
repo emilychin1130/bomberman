@@ -18,6 +18,7 @@ public class Bomb extends JPanel{
 	final int YVAL;
 	private BufferedImage image;
 
+	//constructs Bomb object, reads bomb file
 	public Bomb(Bomberman person) {
 		XVAL = person.getx();
 		YVAL = person.gety();
@@ -29,7 +30,14 @@ public class Bomb extends JPanel{
 		}
 	}
 
+	//draws bomb image
 	public void render(Graphics g) {
 		g.drawImage(image, XVAL, YVAL, this);
+/*		try {
+    		Thread.sleep(3000);
+		} 		
+		catch(InterruptedException e) {}
+		g.clearRect(XVAL, YVAL, image.getWidth(null), image.getHeight(null));
+		*/
 	}
 }

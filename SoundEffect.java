@@ -19,7 +19,7 @@ public enum SoundEffect {
       MUTE, LOW, MEDIUM, HIGH
    }
    
-   public static Volume volume = Volume.LOW;
+   public static Volume volume = Volume.MEDIUM;
    
    // Each sound effect has its own clip, loaded with its own sound file.
    private Clip clip;
@@ -46,16 +46,16 @@ public enum SoundEffect {
    
    // Play or Re-play the sound effect from the beginning, by rewinding.
    public void play() {
-      if (volume != Volume.MUTE) {
-         if (clip.isRunning())
-            clip.stop();   // Stop the player if it is still running
+      //if (volume != Volume.MUTE) {
+         //if (clip.isRunning())
+            //clip.stop();   // Stop the player if it is still running
          clip.setFramePosition(0); // rewind to the beginning
          clip.start();     // Start playing
-      }
+      //}
    }
    
    // Optional static method to pre-load all the sound files.
-   static void init() {
-      values(); // calls the constructor for all the elements
+   //static void init() {
+      //values(); // calls the constructor for all the elements
    }
 }
